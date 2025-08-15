@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Análise | Férias Militares</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .file-input-label {
+            display: block; padding: 1rem; border: 2px dashed #D1D5DB; border-radius: 0.5rem;
+            cursor: pointer; text-align: center; transition: all 0.2s ease-in-out;
+        }
+        .file-input-label:hover { background-color: #F9FAFB; border-color: #6B7280; }
+        .file-input-label span { display: block; font-size: 0.875rem; color: #4B5563; }
+        .file-input-label .icon { font-size: 1.5rem; margin-bottom: 0.5rem; color: #6B7280; }
+        @media print {
+            body * { visibility: hidden; }
+            #procuracao-content, #procuracao-content * { visibility: visible; }
+            #procuracao-content {
+                position: absolute; left: 0; top: 0; margin: 2cm;
+                font-size: 12pt; line-height: 1.5;
+            }
+            #print-button { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+
+    <!-- Container Principal do Formulário -->
+    <div id="form-container" class="w-full max-w-3xl bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-2xl transition-all duration-500">
+        <div class="text-center mb-8">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">Análise de Direito | Férias Militares</h1>
+            <p class="text-gray-600 mt-2 text-sm sm:text-base">Preencha os campos abaixo para iniciarmos a análise do seu caso. É rápido, seguro e 100% digital.</p>
+        </div>
+
+        <!-- Formulário configurado para enviar dados via Formspree -->
+        <form id="intake-form" action="https://formspree.io/f/your_unique_code" method="POST" enctype="multipart/form-data">
+            
+            <!-- Seção 1: Dados Pessoais -->
+            <fieldset class="mb-8">
+                <legend class="text-lg font-semibold text-gray-700 border-b-2 border-gray-200 w-full pb-2 mb-4">1. Dados Pessoais</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
+                        <input type="text" id="fullName" name="Nome Completo" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="cpf" class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
+                        <input type="text" id="cpf" name="CPF" placeholder="000.000.000-00" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                     <div>
+                        <label for="maritalStatus" class="block text-sm font-medium text-gray-700 mb-1">Estado Civil Atual</label>
+                        <input type="text" id="maritalStatus" name="Estado Civil" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="profession" class="block text-sm font-medium text-gray-700 mb-1">Profissão Atual</label>
+                        <input type="text" id="profession" name="Profissão" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail (Principal Contato)</label>
+                        <input type="email" id="email" name="Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Telefone / WhatsApp</label>
+                        <input type="tel" id="phone" name="Telefone" placeholder="(00) 90000-0000" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Endereço Completo</label>
+                        <input type="text" id="address" name="Endereço" placeholder="Rua, Nº, Bairro, Cidade, Estado, CEP" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Seção 2: Dados Militares -->
+            <fieldset class="mb-8">
+                <legend class="text-lg font-semibold text-gray-700 border-b-2 border-gray-200 w-full pb-2 mb-4">2. Informações Militares</legend>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="force" class="block text-sm font-medium text-gray-700 mb-1">Força Armada</label>
+                        <select id="force" name="Força Armada" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                            <option value="">Selecione...</option>
+                            <option value="exercito">Exército</option>
+                            <option value="marinha">Marinha</option>
+                            <option value="aeronautica">Aeronáutica</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="rank" class="block text-sm font-medium text-gray-700 mb-1">Última Graduação/Posto</label>
+                        <input type="text" id="rank" name="Graduação/Posto" placeholder="Ex: Soldado, Cabo" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="incorporationDate" class="block text-sm font-medium text-gray-700 mb-1">Data de Incorporação</label>
+                        <input type="date" id="incorporationDate" name="Data de Incorporação" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="dischargeDate" class="block text-sm font-medium text-gray-700 mb-1">Data de Licenciamento</label>
+                        <input type="date" id="dischargeDate" name="Data de Licenciamento" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Seção 3: Envio de Documentos -->
+            <fieldset class="mb-8">
+                <legend class="text-lg font-semibold text-gray-700 border-b-2 border-gray-200 w-full pb-2 mb-4">3. Envio de Documentos</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                         <label for="docId" class="block text-sm font-medium text-gray-700 mb-2">Identidade (frente e verso)</label>
+                         <input type="file" id="docId" name="Identidade" multiple class="hidden" accept="image/*,application/pdf">
+                         <label for="docId" class="file-input-label"><div class="icon">📄</div><span data-default="Clique para selecionar os arquivos">Clique para selecionar os arquivos</span></label>
+                    </div>
+                    <div>
+                         <label for="docAddress" class="block text-sm font-medium text-gray-700 mb-2">Comprovante de Residência</label>
+                         <input type="file" id="docAddress" name="Comprovante de Residência" class="hidden" accept="image/*,application/pdf">
+                         <label for="docAddress" class="file-input-label"><div class="icon">🏠</div><span data-default="Clique para selecionar o arquivo">Clique para selecionar o arquivo</span></label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Seção 4: Termos e Envio -->
+            <fieldset>
+                <div class="flex items-start">
+                    <input id="terms" name="terms" type="checkbox" class="h-4 w-4 mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500" required>
+                    <label for="terms" class="ml-3 block text-sm text-gray-700">
+                        Declaro que as informações são verdadeiras e estou ciente de que este é um pedido de análise inicial. Após o envio, a procuração será gerada para minha conferência e assinatura.
+                    </label>
+                </div>
+            </fieldset>
+
+            <div class="mt-10 text-center">
+                <button type="submit" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-105">
+                    Enviar Dados e Gerar Procuração
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Container da Procuração (Oculto) -->
+    <div id="procuracao-container" class="hidden w-full max-w-4xl bg-white p-8 sm:p-10 md:p-12 rounded-xl shadow-2xl">
+        <div id="procuracao-content">
+            <h2 class="text-2xl font-bold text-center mb-6">PROCURAÇÃO “AD JUDICIA ET EXTRA”</h2>
+            <p class="mb-4"><strong>OUTORGANTE:</strong> <span id="proc-fullName"></span>, nacionalidade não informada, estado civil <span id="proc-maritalStatus"></span>, profissão <span id="proc-profession"></span>, portador(a) do CPF nº <span id="proc-cpf"></span>, residente e domiciliado(a) no endereço <span id="proc-address"></span>.</p>
+            <p class="mb-4"><strong>OUTORGADO:</strong> Ricardo Rossetto, advogado, inscrito na OAB/RS sob o nº 135.294, com endereço profissional na [SEU ENDEREÇO PROFISSIONAL AQUI], e-mail ricardo.rossetto.adv@gmail.com.</p>
+            <p class="mb-4"><strong>PODERES:</strong> Pelo presente instrumento, o(a) OUTORGANTE nomeia e constitui seu bastante procurador o OUTORGADO, a quem confere os amplos, gerais e ilimitados poderes da cláusula “ad judicia et extra”, para o foro em geral, podendo, portanto, em qualquer Juízo, Instância ou Tribunal, propor contra a UNIÃO FEDERAL a ação competente, visando o recebimento de valores retroativos referentes ao terço constitucional de férias não pagos durante o período de serviço militar, podendo requerer, contestar, recorrer, transigir, firmar acordos, receber valores e dar quitação, podendo ainda substabelecer esta em outrem, com ou sem reservas de iguais poderes, dando tudo por bom, firme e valioso.</p>
+            <p class="mb-4"><strong>PODERES ESPECÍFICOS:</strong> Confere ainda poderes especiais para confessar, desistir, transigir, firmar compromissos ou acordos, receber e dar quitação, levantar ou receber alvarás, RPVs e precatórios, em nome do(a) OUTORGANTE, bem como declarar a hipossuficiência econômica do(a) OUTORGANTE para fins de gratuidade de justiça.</p>
+            <p class="mb-4"><strong>HONORÁRIOS:</strong> Fica ajustado que o OUTORGADO receberá, a título de honorários advocatícios contratuais, o percentual de 30% (trinta por cento) sobre o proveito econômico obtido pelo(a) OUTORGANTE ao final da demanda, seja por meio de acordo ou decisão judicial, autorizando desde já o destaque do valor quando do recebimento.</p>
+            <p class="text-center mt-8">Ijuí/RS, <span id="proc-date"></span>.</p>
+            <div class="mt-16 text-center">
+                <p>_________________________________________</p>
+                <p><span id="proc-signatureName"></span></p>
+            </div>
+        </div>
+        <div class="mt-10 text-center">
+            <button id="print-button" onclick="window.print()" class="bg-green-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all">
+                Imprimir ou Salvar como PDF
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURAÇÃO IMPORTANTE ---
+        // 1. Crie uma conta em https://formspree.io/
+        // 2. Crie um novo formulário e aponte para seu e-mail.
+        // 3. Copie o código único do formulário (ex: mgegyqle) e cole na linha abaixo.
+        const formspreeCode = "mgvzqqgy"; // <-- SUBSTITUA PELO SEU CÓDIGO
+        const form = document.getElementById('intake-form');
+        form.action = `https://formspree.io/f/${formspreeCode}`;
+        // --------------------------------
+
+        const formContainer = document.getElementById('form-container');
+        const procuracaoContainer = document.getElementById('procuracao-container');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(form);
+            
+            // Preenche os dados da procuração
+            document.getElementById('proc-fullName').textContent = formData.get('Nome Completo');
+            document.getElementById('proc-maritalStatus').textContent = formData.get('Estado Civil');
+            document.getElementById('proc-profession').textContent = formData.get('Profissão');
+            document.getElementById('proc-cpf').textContent = formData.get('CPF');
+            document.getElementById('proc-address').textContent = formData.get('Endereço');
+            document.getElementById('proc-signatureName').textContent = formData.get('Nome Completo');
+            
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('proc-date').textContent = today.toLocaleDateString('pt-BR', options);
+
+            // Envia os dados para o Formspree em segundo plano
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Formulário enviado com sucesso para o Formspree!');
+                } else {
+                    console.error('Erro ao enviar o formulário para o Formspree.');
+                }
+            }).catch(error => {
+                console.error('Erro de rede:', error);
+            });
+
+            // Oculta o formulário e exibe a procuração
+            formContainer.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                formContainer.style.display = 'none';
+                procuracaoContainer.classList.remove('hidden');
+                procuracaoContainer.classList.add('block');
+            }, 500);
+        });
+
+        // Script para mostrar o nome do arquivo selecionado
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const label = this.nextElementSibling;
+                const span = label.querySelector('span');
+                const defaultText = span.getAttribute('data-default');
+                if (this.files.length > 0) {
+                    span.textContent = this.files.length === 1 ? this.files[0].name : `${this.files.length} arquivos selecionados`;
+                } else {
+                    span.textContent = defaultText;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
